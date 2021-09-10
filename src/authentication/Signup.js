@@ -2,7 +2,7 @@ import React , { useRef } from 'react'
 import { Button , Form } from 'react-bootstrap' 
 import { useAuth } from './AuthProvider'
 import 'bootstrap/dist/css/bootstrap.min.css'
-import { Link } from 'react-router-dom'
+import { Link ,useHistory} from 'react-router-dom'
 
 
 const Signup = () => {
@@ -11,12 +11,13 @@ const Signup = () => {
     const passRef = useRef()
     const { signup } = useAuth()
     const { currentUser } = useAuth()
-
+    const history = useHistory()
 
 
     async function handlesignup(){
         try{
             await signup(userRef.current.value , passRef.current.value)
+            history.push("/")
         }
         catch(e){
             console.log(e.code)
