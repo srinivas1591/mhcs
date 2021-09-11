@@ -43,12 +43,26 @@ const AuthProvider = ({children}) => {
             }
         }
 
+        async function forgot(username){
+            try{
+                await auth.sendPasswordResetEmail(username)
+                if(auth)
+                    history.push('/signin')
+            }
+            catch(e){
+                setWarning(e)
+            }
+        }
+
+
+
     const value = {
         currentUser , 
         signup ,
         logout ,
         signin ,
-        warning
+        warning , 
+        forgot
     }
 
     async function logout(){

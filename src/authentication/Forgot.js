@@ -3,17 +3,16 @@ import { useAuth } from './AuthProvider'
 import { Form , Button ,Alert} from 'react-bootstrap'
 import { Link  } from 'react-router-dom'
 
-const Signin = () => {
+const Forgot = () => {
     const userRef = useRef()
-    const passRef = useRef()
-    const { signin } = useAuth()
-    const { warning } =useAuth()
+    const { warning , forgot} =useAuth()
     const [error , setError] = useState()
-    async function handlesignin()
+    
+    async function handleforgot()
     {
         try{
-            if((passRef.current.value).trim().length!==0 && (userRef.current.value).trim().length!==0){
-                await signin(userRef.current.value , passRef.current.value)
+            if((userRef.current.value).trim().length!==0){
+                await forgot(userRef.current.value)
             }
             else{
                 setError("username and password can't be empty")
@@ -30,13 +29,11 @@ const Signin = () => {
             {error && <Alert variant="danger">{error}</Alert>}
             <Form>
                 <input type="text" ref= { userRef } placeholder="username"/>
-                <input type="password" ref= { passRef } placeholder="password"/>
-                <Button className="btn btn-success" onClick= { handlesignin }>Login</Button>
+                <Button className="btn btn-success" onClick= { handleforgot }>Send Email</Button>
             </Form>
-            <Link to="/signup">Signup</Link><br/>
-            <Link to="/forgot">Forgot Password?</Link>
+            <Link to="/sign">Login</Link>
         </div>
     )
 }
 
-export default Signin
+export default Forgot
