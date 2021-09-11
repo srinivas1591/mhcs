@@ -31,7 +31,7 @@ const Forgot = () => {
                 <input type="text" ref= { userRef } placeholder="username"/>
                 <Button className="btn btn-success" onClick= { handleforgot }>Send Email</Button>
             </Form>
-            <Link to="/sign">Login</Link>
+            <Link to="/signin">Login</Link>
         </div>
     )
 }
