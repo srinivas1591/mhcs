@@ -1,32 +1,34 @@
-import React , { useRef } from 'react'
-import { Button , Form } from 'react-bootstrap' 
+import React , { useRef ,useState} from 'react'
+import { Button , Form ,Alert} from 'react-bootstrap' 
 import { useAuth } from './AuthProvider'
 import 'bootstrap/dist/css/bootstrap.min.css'
-import { Link ,useHistory} from 'react-router-dom'
-
+import { Link} from 'react-router-dom'
 
 const Signup = () => {
 
     const userRef = useRef()
     const passRef = useRef()
-    const { signup } = useAuth()
-    const { currentUser } = useAuth()
-    const history = useHistory()
-
-
+    const { signup ,warning} = useAuth()
+    const [error , setError] = useState()
     async function handlesignup(){
         try{
-            await signup(userRef.current.value , passRef.current.value)
-            history.push("/")
+            if((passRef.current.value).trim().length!==0 && (userRef.current.value).trim().length!==0){
+                await signup(userRef.current.value , passRef.current.value)
+            }
+            else
+            {
+                setError("username and password can't be empty")
+            }
         }
         catch(e){
-            console.log(e.code)
+            console.log(e)
         }
     }
 
     return (
         <div>
-            { currentUser && currentUser.email }
+            {warning && <Alert variant="danger">{(warning.code).slice(5,)}</Alert>}
+            {error && <Alert variant="danger">{error}</Alert>}
             <Form>
                 <input type="text" ref={userRef}  placeholder="username"/><br/>
                 <input type="password" ref={passRef}  placeholder="password"/><br/>

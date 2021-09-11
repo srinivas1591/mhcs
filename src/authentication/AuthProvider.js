@@ -1,5 +1,6 @@
 import React , { useEffect , useState , useContext  } from 'react'
 import { auth } from '../firebase'
+import  { useHistory } from 'react-router-dom'
 
 const AuthContext = React.createContext();
 
@@ -11,6 +12,8 @@ export function useAuth()
 const AuthProvider = ({children}) => {
 
     const [currentUser , setCurrentUser] =useState()
+    const [warning , setWarning] = useState()
+    const history = useHistory()
 
     useEffect(() => {
         auth.onAuthStateChanged(user => {
@@ -21,20 +24,22 @@ const AuthProvider = ({children}) => {
     async function signup(username,password){
         try{
             await auth.createUserWithEmailAndPassword(username,password)
-            
+            console.log(auth)
+            if(auth)
+                history.push('/')
         }
         catch(e){
-            console.log(e.code)
+            setWarning(e)
         }
     }
-
     async function signin(username , password){
             try{
                 await auth.signInWithEmailAndPassword(username,password)
-                
+                if(auth)
+                    history.push('/')
             }
             catch(e){
-                console.log(e.message)
+                setWarning(e)
             }
         }
 
@@ -42,7 +47,8 @@ const AuthProvider = ({children}) => {
         currentUser , 
         signup ,
         logout ,
-        signin
+        signin ,
+        warning
     }
 
     async function logout(){
