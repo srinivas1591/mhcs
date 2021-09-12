@@ -87,6 +87,9 @@ Button {
     .alink{
         color: blue;
     }
+    .alink:hover{
+        color: blue;
+    }
     .sub1{
         margin-right: 0;
     }
