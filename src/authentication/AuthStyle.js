@@ -4,10 +4,10 @@ const AuthStyle = () => {
     return (
         <div>
             <div className="sub1">
-                  <center>  <p>Happiness can be found 
-                        even in <br/> the darkest
-                        of times if one <br/>only 
-                        remembers to turn on the light</p>
+                  <center>  <div className="para"><p>Happiness can be found 
+                        even in  the darkest
+                        of times if one only 
+                        remembers to turn on the light</p></div>
                         <sub> -Albus Dumbledore</sub>
                   </center>
                 </div>

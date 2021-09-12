@@ -16,6 +16,11 @@ body{
     font-family: 'IBM Plex Sans Arabic', sans-serif;
 }
 
+.para
+{
+    max-width: 300px;
+}
+
 .sub1
 {
     margin-right: 55px;
