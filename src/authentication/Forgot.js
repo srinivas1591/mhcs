@@ -1,7 +1,8 @@
-import React , { useRef ,useState} from 'react'
+import React , { useRef ,useState ,useEffect} from 'react'
 import { useAuth } from './AuthProvider'
 import { Form , Button ,Alert} from 'react-bootstrap'
 import { Link  } from 'react-router-dom'
+import AuthStyle from './AuthStyle'
 
 const Forgot = () => {
     const userRef = useRef()
@@ -23,15 +24,33 @@ const Forgot = () => {
         }
     }
 
+    useEffect(() => {
+        setError('')
+    }, [warning]) 
+
     return (
         <div>
+             <center>
             {warning && <Alert variant="danger">{(warning.code).slice(5,)}</Alert>}
-            {error && <Alert variant="danger">{error}</Alert>}
-            <Form>
-                <input type="text" ref= { userRef } placeholder="username"/>
-                <Button className="btn btn-success" onClick= { handleforgot }>Send Email</Button>
-            </Form>
-            <Link to="/signin">Login</Link>
+            {error && <Alert variant="danger">{error}</Alert>}<br/>
+        </center>
+            <font className="title">MHCS AND CG</font>
+            <div className="mainclass">
+                <AuthStyle />
+                <div className="sub2">
+                        <center>  
+                        <Form>
+                            <font className="alink">Reset Password</font>
+                            <input type="text" className='form-control' ref= { userRef } placeholder="username"/>
+                            <Button className="btn btn-success form-control" onClick= { handleforgot }>Send Email</Button>
+                        </Form>
+                        <Link to="/signin" className="alink">Remembered Pasword ? Login</Link>
+                        </center>
+                </div>
+            </div>
+            <br/><br/><br/><br/><br/>
+            <center><font className="copyrights">&copy; We4 Solutions</font></center>
+           
         </div>
     )
 }

@@ -1,7 +1,9 @@
-import React , { useRef ,useState} from 'react'
+import React , { useRef ,useState , useEffect} from 'react'
 import { useAuth } from './AuthProvider'
-import { Form , Button ,Alert} from 'react-bootstrap'
+import { Form , Button ,Alert } from 'react-bootstrap'
 import { Link  } from 'react-router-dom'
+import '../css/auth.css'
+import AuthStyle from './AuthStyle'
 
 const Signin = () => {
     const userRef = useRef()
@@ -23,18 +25,33 @@ const Signin = () => {
             console.log(e)
         }
     }
+    useEffect(() => {
+        setError('')
+    }, [warning])
 
     return (
         <div>
+        <center>
             {warning && <Alert variant="danger">{(warning.code).slice(5,)}</Alert>}
-            {error && <Alert variant="danger">{error}</Alert>}
-            <Form>
-                <input type="text" ref= { userRef } placeholder="username"/>
-                <input type="password" ref= { passRef } placeholder="password"/>
-                <Button className="btn btn-success" onClick= { handlesignin }>Login</Button>
-            </Form>
-            <Link to="/signup">Signup</Link><br/>
-            <Link to="/forgot">Forgot Password?</Link>
+            {error && <Alert variant="danger">{error}</Alert>}<br/>
+        </center>
+            <font className="title">MHCS AND CG</font>
+            <div className="mainclass">
+                <AuthStyle />
+                <div className="sub2">
+                        <center>  
+                                <Form autoComplete="off">
+                                    <font className="alink">Student Login   |   Counsellor Login</font><br/>
+                                    <input type="text"  ref= { userRef } className="form-control" placeholder="username" />
+                                    <input type="password" ref= { passRef } className="form-control" placeholder="password"/>
+                                    <Link to="/forgot" className="alink">Forgot Password?</Link>
+                                    <Button className="btn btn-success form-control" onClick= { handlesignin }>Login</Button>
+                                </Form>
+                                <Link to="/signup" className="alink">New Member? Signup</Link><br/>
+                        </center>
+                </div>
+            </div><br/>
+            <center><font className="copyrights">&copy; We4 Solutions</font></center>
         </div>
     )
 }

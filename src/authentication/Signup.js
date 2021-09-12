@@ -1,10 +1,13 @@
-import React , { useRef ,useState} from 'react'
+import React , { useRef ,useState , useEffect} from 'react'
 import { Button , Form ,Alert} from 'react-bootstrap' 
 import { useAuth } from './AuthProvider'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { Link} from 'react-router-dom'
+import AuthStyle from './AuthStyle'
+import '../css/auth.css'
 
 const Signup = () => {
+
 
     const userRef = useRef()
     const passRef = useRef()
@@ -23,18 +26,36 @@ const Signup = () => {
         catch(e){
             console.log(e)
         }
+
     }
 
+    
+    useEffect(() => {
+        setError('')
+    }, [warning]) 
     return (
         <div>
+             <center>
             {warning && <Alert variant="danger">{(warning.code).slice(5,)}</Alert>}
-            {error && <Alert variant="danger">{error}</Alert>}
-            <Form>
-                <input type="text" ref={userRef}  placeholder="username"/><br/>
-                <input type="password" ref={passRef}  placeholder="password"/><br/>
-                <Button className="btn btn-primary w-100" onClick = { handlesignup }>Signup</Button>
-            </Form>
-            <Link  to="/signin">Signin</Link>
+            {error && <Alert variant="danger">{error}</Alert>}<br/>
+        </center>
+            <font className="title">MHCS AND CG</font>
+            <div className="mainclass">
+                <AuthStyle />
+                <div className="sub2">
+                        <center>  
+                        <Form>
+                            <font className="alink">Student SignUp</font><br/>
+                            <input type="text" ref={userRef} className='form-control' placeholder="username"/>
+                            <input type="password" ref={passRef} className='form-control' placeholder="password"/>
+                            
+                            <Button className="btn btn-primary w-100 form-control" onClick = { handlesignup }>Signup</Button>
+                        </Form><Link  to="/signin" className="alink">Already Have an Account ? Signin</Link>
+                        </center>
+                </div>
+            </div>
+            <br/><br/>
+            <center><font className="copyrights">&copy; We4 Solutions</font></center>
         </div>
     )
 }
