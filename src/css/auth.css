@@ -87,4 +87,7 @@ Button {
     .alink{
         color: blue;
     }
+    .sub1{
+        margin-right: 0;
+    }
 }
