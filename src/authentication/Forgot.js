@@ -49,7 +49,7 @@ const Forgot = () => {
                 </div>
             </div>
             <br/><br/><br/><br/><br/>
-            <center><font className="copyrights">&copy; We4 Solutions</font></center>
+            <center><font className="copyrights">&copy; We4-Solutions</font></center>
            
         </div>
     )
