@@ -6,6 +6,7 @@ import '../css/auth.css'
 import AuthStyle from './AuthStyle'
 
 const Signin = () => {
+    
     const userRef = useRef()
     const passRef = useRef()
     const { signin } = useAuth()
@@ -42,9 +43,9 @@ const Signin = () => {
                         <center>  
                                 <Form autoComplete="off">
                                     <font className="alink">Student Login   |   Counsellor Login</font><br/>
-                                    <input type="text"  ref= { userRef } className="form-control" placeholder="username" />
+                                    <input type="email"  ref= { userRef } className="form-control" placeholder="email" />
                                     <input type="password" ref= { passRef } className="form-control" placeholder="password"/>
-                                    <Link to="/forgot" className="alink">Forgot Password?</Link>
+                                    <Link to="/forgot" className="alink">Forgot Password?</Link><br/>
                                     <Button className="btn btn-success form-control" onClick= { handlesignin }>Login</Button>
                                 </Form>
                                 <Link to="/signup" className="alink">New Member? Signup</Link><br/>

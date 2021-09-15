@@ -41,7 +41,7 @@ const Forgot = () => {
                         <center>  
                         <Form>
                             <font className="alink">Reset Password</font>
-                            <input type="text" className='form-control' ref= { userRef } placeholder="username"/>
+                            <input type="email" className='form-control' ref= { userRef } placeholder="email"/>
                             <Button className="btn btn-success form-control" onClick= { handleforgot }>Send Email</Button>
                         </Form>
                         <Link to="/signin" className="alink">Remembered Pasword ? Login</Link>

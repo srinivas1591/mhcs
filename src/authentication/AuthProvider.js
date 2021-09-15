@@ -1,4 +1,4 @@
-import React , { useEffect , useState , useContext  } from 'react'
+import React , { useState , useContext  ,useEffect} from 'react'
 import { auth } from '../firebase'
 import  { useHistory } from 'react-router-dom'
 
@@ -11,20 +11,21 @@ export function useAuth()
 
 const AuthProvider = ({children}) => {
 
-    const [currentUser , setCurrentUser] =useState()
-    const [warning , setWarning] = useState()
+    const [warning , setWarning] = useState('')
+    const [currentUser , setCurrentUser] = useState('')
     const history = useHistory()
 
+   
     useEffect(() => {
         auth.onAuthStateChanged(user => {
             setCurrentUser(user)
         })
-    }, [])
+      }, [])
+    
 
     async function signup(username,password){
         try{
             await auth.createUserWithEmailAndPassword(username,password)
-            console.log(auth)
             if(auth)
                 history.push('/')
         }
@@ -33,10 +34,12 @@ const AuthProvider = ({children}) => {
         }
     }
     async function signin(username , password){
+           
             try{
-                await auth.signInWithEmailAndPassword(username,password)
-                if(auth)
+                await  auth.signInWithEmailAndPassword(username,password)
+                if(auth){
                     history.push('/')
+                }
             }
             catch(e){
                 setWarning(e)
@@ -56,12 +59,12 @@ const AuthProvider = ({children}) => {
 
 
 
-    const value = {
-        currentUser , 
+    const value = { 
         signup ,
         logout ,
         signin ,
         warning , 
+        currentUser,
         forgot
     }
 

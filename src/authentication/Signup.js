@@ -7,8 +7,6 @@ import AuthStyle from './AuthStyle'
 import '../css/auth.css'
 
 const Signup = () => {
-
-
     const userRef = useRef()
     const passRef = useRef()
     const { signup ,warning} = useAuth()
@@ -20,7 +18,7 @@ const Signup = () => {
             }
             else
             {
-                setError("username and password can't be empty")
+                setError("usernamezz and password can't be empty")
             }
         }
         catch(e){
@@ -46,7 +44,7 @@ const Signup = () => {
                         <center>  
                         <Form>
                             <font className="alink">Student SignUp</font><br/>
-                            <input type="text" ref={userRef} className='form-control' placeholder="username"/>
+                            <input type="email" ref={userRef} className='form-control' placeholder="email"/>
                             <input type="password" ref={passRef} className='form-control' placeholder="password"/>
                             
                             <Button className="btn btn-primary w-100 form-control" onClick = { handlesignup }>Signup</Button>
