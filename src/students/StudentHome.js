@@ -2,6 +2,11 @@ import React from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { Link } from 'react-router-dom'
 import '../css/stud.css'
+import counselling from '../assets/counselling.jpg';
+import career from '../assets/career.jpg'
+import saf from '../assets/saf.jpg'
+
+import  'react-bootstrap'
 const StudentHome = () => {
     return (
         <div>
@@ -34,7 +39,7 @@ const StudentHome = () => {
     <div className="col-sm-6">
       <div className="card-deck">
         <div className="card-body">
-          <img className="card-img" src="../assets/counselling.jpg" alt="some thing"/>
+          <img className="card-img" src={counselling} alt="some thing"/>
         </div>
       </div>
     </div>
@@ -67,7 +72,7 @@ const StudentHome = () => {
     <div className="col-sm-6">
       <div className="card-deck">
         <div className="card-body">
-          <img className="card-img" src="assets/career.jpg" alt="some thing"/>
+          <img className="card-img" src={career} alt="some thing"/>
         </div>
       </div>
     </div>
@@ -79,7 +84,7 @@ const StudentHome = () => {
     <div className="col-sm-6">
       <div className="card-deck">
         <div className="card-body">
-          <img className="card-img" src="assets/saf.jpg" alt="some thing"/>
+          <img className="card-img" src={saf} alt="some thing"/>
         </div>
       </div>
     </div>
