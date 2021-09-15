@@ -8,6 +8,10 @@ const Dashboard = () => {
     async function handlesignout(){
         await logout()
     }
+
+    if(currentUser){
+        document.body.style.backgroundImage = "none";
+    }
     return (
         <div>
             Welcome { currentUser && currentUser.email }
