@@ -9,8 +9,9 @@ import '../css/auth.css'
 const Signup = () => {
     const userRef = useRef()
     const passRef = useRef()
-    const { signup ,warning} = useAuth()
+    const { signup ,warning } = useAuth()
     const [error , setError] = useState()
+    
     async function handlesignup(){
         try{
             if((passRef.current.value).trim().length!==0 && (userRef.current.value).trim().length!==0){
@@ -52,7 +53,7 @@ const Signup = () => {
                         </center>
                 </div>
             </div>
-            <br/><br/>
+            <br/><br/><br/>
             <center><font className="copyrights">&copy; We4 Solutions</font></center>
         </div>
     )

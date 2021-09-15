@@ -22,6 +22,7 @@ const AuthProvider = ({children}) => {
         })
       }, [])
     
+      
 
     async function signup(username,password){
         try{

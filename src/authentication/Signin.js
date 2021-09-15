@@ -4,9 +4,10 @@ import { Form , Button ,Alert } from 'react-bootstrap'
 import { Link  } from 'react-router-dom'
 import '../css/auth.css'
 import AuthStyle from './AuthStyle'
+import bg from '../assets/bg.jpg'
+
 
 const Signin = () => {
-    
     const userRef = useRef()
     const passRef = useRef()
     const { signin } = useAuth()
@@ -30,6 +31,8 @@ const Signin = () => {
         setError('')
     }, [warning])
 
+    document.body.style.backgroundImage = `url(${bg})`
+
     return (
         <div>
         <center>
@@ -51,7 +54,7 @@ const Signin = () => {
                                 <Link to="/signup" className="alink">New Member? Signup</Link><br/>
                         </center>
                 </div>
-            </div><br/>
+            </div><br/><br/>
             <center><font className="copyrights">&copy; We4 Solutions</font></center>
         </div>
     )
