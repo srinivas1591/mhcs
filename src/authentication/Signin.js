@@ -4,7 +4,6 @@ import { Form , Button ,Alert } from 'react-bootstrap'
 import { Link  } from 'react-router-dom'
 import '../css/auth.css'
 import AuthStyle from './AuthStyle'
-import bg from '../assets/bg.jpg'
 
 
 const Signin = () => {
@@ -31,7 +30,6 @@ const Signin = () => {
         setError('')
     }, [warning])
 
-    document.body.style.backgroundImage = `url(${bg})`
 
     return (
         <div>

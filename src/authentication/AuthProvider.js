@@ -58,7 +58,10 @@ const AuthProvider = ({children}) => {
             }
         }
 
-
+ async function logout(){
+        await auth.signOut()
+        history.push('/signin')
+    }
 
     const value = { 
         signup ,
@@ -69,9 +72,7 @@ const AuthProvider = ({children}) => {
         forgot
     }
 
-    async function logout(){
-        await auth.signOut()
-    }
+   
 
     
 
