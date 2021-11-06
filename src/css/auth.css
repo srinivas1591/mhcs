@@ -1,18 +1,10 @@
-body{
-    background-image: url('../assets/bg.jpg');
-    background-position: center;
-    background-attachment: fixed;
-    background-repeat: no-repeat;
-    background-size: cover;
-}
-
 .mainclass
 {
     display: flex;
     justify-content: space-around;
     align-items: center;
     flex-direction: row;
-    margin: 20vh;
+    margin: 15vh;
     font-family: 'IBM Plex Sans Arabic', sans-serif;
 }
 
@@ -30,16 +22,21 @@ body{
 .form-control{
     border-radius: 20px;
     margin-bottom: 25px;
-    border : 2px solid white;
-    padding: 10px;
+    border : 4px solid white;
+    padding: 15px;
 }
 
-Button {
-    max-width: 250px;
+button{
+    border-radius: 15px;
+    color: white;
+    background-color: green;
+    width: 250px;
+    padding: 15px;
 }
 
 .alink{
     color: white;
+    font-weight: bold;
     text-decoration: none;
 }
 
@@ -60,6 +57,12 @@ Button {
     color: darkslategrey;
     font-weight: bold;
     font-size: 10px;
+}
+
+.sub2{
+    background-color: blue;
+    padding: 55px;
+    border-radius: 15px;
 }
 
 @media (max-width : 940px){
@@ -92,5 +95,9 @@ Button {
     }
     .sub1{
         margin-right: 0;
+    }
+    .sub2
+    {
+        background-color: white;
     }
 }

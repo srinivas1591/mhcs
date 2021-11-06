@@ -10,10 +10,6 @@ import Navbarex from '../students/Navbarex'
 
 const StudentHome = () => {
 
-
-  
-
-  
     return (
         <div>
             <Navbarex />
@@ -35,7 +31,7 @@ const StudentHome = () => {
           <h5 className="card-title">Get Counselling from Pyschology counsellor</h5>
           <p className="card-text">If you are feeling low and need 
             to share something we are here to help you</p>
-          <Link to="#" className="btn btn-primary">Counselling</Link>
+          <Link to="/councelling" className="btn btn-primary">Counselling</Link>
         </div>
       </div>
     </div>
@@ -48,7 +44,7 @@ const StudentHome = () => {
           <h5 className="card-title">Get Career Guidence From your Faculty</h5>
           <p className="card-text">Confused what to do ? where to go?
             Get guided by a faculty</p>
-          <Link to="#" className="btn btn-primary">Career Guidence</Link>
+          <Link to="careerguidance" className="btn btn-primary">Career Guidence</Link>
         </div>
       </div>
     </div>
@@ -80,7 +76,7 @@ const StudentHome = () => {
           <h5 className="card-title ">Suggest your if he/she feels low</h5>
           <p className="card-text">Do you feel your friend is behaving strange.
             If you think you cannot help. Ping us here</p>
-          <Link to="#" className="btn btn-primary">Suggest a Friend</Link>
+          <Link to="suggestfriend" className="btn btn-primary">Suggest a Friend</Link>
         </div>
       </div>
     </div>

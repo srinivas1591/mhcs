@@ -14,6 +14,7 @@ const Signin = () => {
     const [error , setError] = useState()
     async function handlesignin()
     {
+        
         try{
             if((passRef.current.value).trim().length!==0 && (userRef.current.value).trim().length!==0){
                 await signin(userRef.current.value , passRef.current.value)
@@ -47,12 +48,12 @@ const Signin = () => {
                                     <input type="email"  ref= { userRef } className="form-control" placeholder="email" />
                                     <input type="password" ref= { passRef } className="form-control" placeholder="password"/>
                                     <Link to="/forgot" className="alink">Forgot Password?</Link><br/>
-                                    <Button className="btn btn-success form-control" onClick= { handlesignin }>Login</Button>
+                                    <Button className="btn btn-success" onClick= { handlesignin }>Login</Button>
                                 </Form>
                                 <Link to="/signup" className="alink">New Member? Signup</Link><br/>
                         </center>
                 </div>
-            </div><br/><br/>
+            </div>
             <center><font className="copyrights">&copy; We4 Solutions</font></center>
         </div>
     )

@@ -1,5 +1,5 @@
 import React , { useRef ,useState , useEffect} from 'react'
-import { Button , Form ,Alert} from 'react-bootstrap' 
+import {Button ,Form ,Alert} from 'react-bootstrap' 
 import { useAuth } from './AuthProvider'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { Link} from 'react-router-dom'
@@ -48,12 +48,12 @@ const Signup = () => {
                             <input type="email" ref={userRef} className='form-control' placeholder="email"/>
                             <input type="password" ref={passRef} className='form-control' placeholder="password"/>
                             
-                            <Button className="btn btn-primary w-100 form-control" onClick = { handlesignup }>Signup</Button>
+                            <Button className="btn btn-success"  onClick = { handlesignup }>Signup</Button>
                         </Form><Link  to="/signin" className="alink">Already Have an Account ? Signin</Link>
                         </center>
                 </div>
             </div>
-            <br/><br/><br/>
+            <br/>
             <center><font className="copyrights">&copy; We4 Solutions</font></center>
         </div>
     )
