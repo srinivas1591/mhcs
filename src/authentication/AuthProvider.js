@@ -1,6 +1,7 @@
 import React , { useState , useContext  ,useEffect} from 'react'
-import { auth } from '../firebase'
+import { auth ,db } from '../firebase'
 import  { useHistory } from 'react-router-dom'
+
 
 const AuthContext = React.createContext();
 
@@ -13,6 +14,7 @@ const AuthProvider = ({children}) => {
 
     const [warning , setWarning] = useState('')
     const [currentUser , setCurrentUser] = useState('')
+    const [currentUserID , setCurrentUserID] = useState('')    
     const history = useHistory()
 
    
@@ -24,21 +26,31 @@ const AuthProvider = ({children}) => {
     
       
 
-    async function signup(username,password){
+    async function signup(username,password,clgid ,classroom){
         try{
-            await auth.createUserWithEmailAndPassword(username,password)
-            if(auth)
-                history.push('/')
-        }
-        catch(e){
-            setWarning(e)
-        }
+            auth.createUserWithEmailAndPassword(username,password).then(auth => {
+              if(auth.user)
+              {
+                setCurrentUserID(auth.user.id) 
+                db.collection('users').doc(auth.user.uid).set({'email':username , 'collegeid' : clgid , 'class' : classroom})
+                 history.push('/')
+            }
+            }).catch(e => {
+              console.log(e)
+            })
+           }
+           catch(e){
+             console.log(e)
+           }
     }
+
+
     async function signin(username , password){
            
             try{
                 await  auth.signInWithEmailAndPassword(username,password)
                 if(auth){
+                   // setCurrentUserID(auth.user.uid)
                     history.push('/')
                 }
             }
@@ -69,6 +81,7 @@ const AuthProvider = ({children}) => {
         signin ,
         warning , 
         currentUser,
+        currentUserID,
         forgot
     }
 

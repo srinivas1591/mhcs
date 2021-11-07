@@ -9,13 +9,15 @@ import '../css/auth.css'
 const Signup = () => {
     const userRef = useRef()
     const passRef = useRef()
+    const clgidRef = useRef()
+    const classRef = useRef()
     const { signup ,warning } = useAuth()
     const [error , setError] = useState()
     
     async function handlesignup(){
         try{
-            if((passRef.current.value).trim().length!==0 && (userRef.current.value).trim().length!==0){
-                await signup(userRef.current.value , passRef.current.value)
+            if((passRef.current.value).trim().length!==0 && (classRef.current.value).trim().length!==0 && (userRef.current.value).trim().length!==0 && (clgidRef.current.value).trim().length!==0){
+                await signup(userRef.current.value , passRef.current.value , clgidRef.current.value , classRef.current.value)
             }
             else
             {
@@ -47,7 +49,8 @@ const Signup = () => {
                             <font className="alink">Student SignUp</font><br/>
                             <input type="email" ref={userRef} className='form-control' placeholder="email"/>
                             <input type="password" ref={passRef} className='form-control' placeholder="password"/>
-                            
+                            <input type="text" ref={clgidRef} className="form-control" placeholder="collegeid"/>
+                            <input type="text" ref={classRef} className="form-control" placeholder="class"/>
                             <Button className="btn btn-success"  onClick = { handlesignup }>Signup</Button>
                         </Form><Link  to="/signin" className="alink">Already Have an Account ? Signin</Link>
                         </center>

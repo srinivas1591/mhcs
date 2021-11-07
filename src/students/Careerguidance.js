@@ -22,7 +22,7 @@ const Careerguidance = () => {
     </div>
     </div>
 
-    <div class="col-sm-6">
+    <div class="col-sm-5">
         <div class="card-deck bg-light">
           <div class="card-body">
             <h2 class="card-title text-center">Career Guidance</h2>
