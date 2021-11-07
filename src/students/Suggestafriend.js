@@ -21,7 +21,7 @@ const Suggestafriend = () => {
       const authId=auth.X
       await db.collection("suggestfirend").doc().set({'suggestedby' : authId , 'name' : nameRef.current.value , 'id': idRef.current.value , 'reason' : suggestionRef.current.value , 'behaviour changes' : changes , 'sharing' : share})
       .then(auth =>{
-        setSuccess("successfully submitted!!!")
+        setSuccess("successfully submitted!!!!!")
         setError('')
       }).catch(e=>{
         setError("Something went wrong , try please try again!!!")
