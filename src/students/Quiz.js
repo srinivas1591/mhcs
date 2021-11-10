@@ -23,7 +23,7 @@ const Quiz = () => {
          const useru = await db.collection('users').doc(authId).get()
          const usernames = useru.data().username
          await db.collection('quiz').doc().set({'user':authId,'userId':usernames,'rating':rate,'things':thingsRef.current.value,'fam':famRef.current.value,'motivate':motivate , 'feeling':feel})
-         .then(auth=>{
+         .then(auth=>{ 
             setSuccess("Successfully Submitted!!!")
             document.getElementById('form').reset()
             setError('')
