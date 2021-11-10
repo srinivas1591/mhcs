@@ -7,17 +7,11 @@ import  back  from '../assets/back.png'
 import firebase from 'firebase/app';
 import 'firebase/firestore';
 
-const Chats = ({userId}) => { 
-    const [name,setName]=useState()
-    const [error , setError] = useState()
-    const [messages , setMessages] = useState()
+const CounselChat = () => { 
+    const [error , setError] = useState('')
+    const [messages , setMessages] = useState('')
     const messageRef = useRef()
     useEffect(() => {
-        async function getuser(){
-            const user=await db.collection('users').doc(userId).get()
-            setName(user.data().username)
-        }
-        getuser()
         const scrollToBottom = () => {
             animateScroll.scrollToBottom({
               containerId: "mydiv",
@@ -26,9 +20,8 @@ const Chats = ({userId}) => {
             });
           };
           scrollToBottom()
-
           db
-          .collection(userId)
+          .collection(auth.X)
           .orderBy("createdAt")
           .onSnapshot((snapshot) => {
             setMessages(
@@ -36,7 +29,7 @@ const Chats = ({userId}) => {
             );
             scrollToBottom();
           });
-    }, [userId])
+    }, [])
     async function handlemessage(){
         if((messageRef.current.value).length===0)
         {
@@ -44,9 +37,12 @@ const Chats = ({userId}) => {
         }
         else{
             const authId=auth.X
-            await db.collection(userId).doc().set({  'sender' : authId ,
-            'createdAt' : firebase.firestore.FieldValue.serverTimestamp(),
-            'message' : messageRef.current.value }).then(auth =>{
+            const messageplate = {
+                'sender' : authId ,
+                'createdAt' : firebase.firestore.FieldValue.serverTimestamp(),
+                'message' : messageRef.current.value
+            }
+            await db.collection(authId).doc().set({ messageplate }).then(auth =>{
                 console.log('sent successfully')
                 document.getElementById('inp').value=''
             }).catch(e =>{
@@ -54,8 +50,6 @@ const Chats = ({userId}) => {
             })
         }
     }
-
-  
     return (
         <div>
             <center>
@@ -65,23 +59,19 @@ const Chats = ({userId}) => {
             <div class="bg-light ">
                 <div class="w-100 bg-primary text-light text-bold p-3 font-weight-bold">
                     <img src="https://www.jing.fm/clipimg/detail/375-3757880_my-account-profile-icon-transparent-white.png" alt="something" class="rounded-circle" width="30px" height="30px"/>
-                      &nbsp;{name}
+                      &nbsp;Counsellor
                 </div>
-                <Link to='/councellorportal'><img src= {back} alt="it helps" style={{width:25}}/></Link>
+                <Link to='/'><img src= {back} alt="it helps" style={{width:25}}/></Link>
 
                     <div id="mydiv" class="b-0 overflow-auto" style={{height: "33em"}}>
-                    
-        {messages && messages.map(dis =>(
-            <div>
-           <div class="col-sm-5 mt-3 d-flex justify-content-start"  id="councellor">
-           <img src="https://www.jing.fm/clipimg/detail/375-3757880_my-account-profile-icon-transparent-white.png" alt="something" class="rounded-circle" width="30px" height="30px"/>
-           <p class="col-sm-auto p-2 w-100 shadow-sm"  style={{backgroundColor: "rgb(255, 255, 255)", borderRadius: "0px 10px 10px 10px"}}>
-              {dis.data.message}
-           </p>
-       </div>
-
-        </div>
-        ))}
+                        {messages && messages.map(dis => (
+                            <div class="col-sm-5 mt-3 d-flex justify-content-start"  id="councellor">
+                            <img src="https://www.jing.fm/clipimg/detail/375-3757880_my-account-profile-icon-transparent-white.png" alt="something" class="rounded-circle" width="30px" height="30px"/>
+                            <p class="col-sm-auto p-2 shadow-sm"  style={{backgroundColor: "rgb(255, 255, 255)", borderRadius: "0px 10px 10px 10px"}}>
+                                {dis.data.message}
+                            </p>
+                        </div>
+                        ))}
                     </div>
                
 
@@ -104,5 +94,4 @@ const Chats = ({userId}) => {
     )
 }
 
-
-export default Chats
+export default CounselChat

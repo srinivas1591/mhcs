@@ -21,6 +21,8 @@ const Feedback = () => {
          db.collection('feedback').doc(authId).set({'service' : service , 'suggestion' :  sayRef.current.value , 'rating' : rate})
          .then(auth =>{
             setSuccess("Hurray")
+            document.getElementById('form').reset()
+            setError('')
          }).catch(e =>{
             setError(e) 
          })
@@ -51,7 +53,7 @@ const Feedback = () => {
     <div class="card-deck bg-light">
       <div class="card-body">
         <h2 class="card-title text-center">Feedback</h2>
-        <form name="f">
+        <form name="f" id="form">
             <div class="form-group">
                 <label for="comment">What help have you got?</label>
                 <div>

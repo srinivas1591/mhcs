@@ -20,9 +20,13 @@ const Quiz = () => {
       }
       else{
          const authId=auth.X
-         await db.collection('quiz').doc().set({'user':authId,'rating':rate,'things':thingsRef.current.value,'fam':famRef.current.value,'motivate':motivate , 'feeling':feel})
+         const useru = await db.collection('users').doc(authId).get()
+         const usernames = useru.data().username
+         await db.collection('quiz').doc().set({'user':authId,'userId':usernames,'rating':rate,'things':thingsRef.current.value,'fam':famRef.current.value,'motivate':motivate , 'feeling':feel})
          .then(auth=>{
             setSuccess("Successfully Submitted!!!")
+            document.getElementById('form').reset()
+            setError('')
          }).catch(e=>{
             setError("sorry for inconvinience")
          })
@@ -50,7 +54,7 @@ const Quiz = () => {
     <div class="card-deck bg-light">
       <div class="card-body">
         <h2 class="card-title text-center">Quiz</h2>
-        <form name="f">
+        <form name="f" id="form">
         <div class="form-group">
             <label for="comment">Rate your day week</label>
             <div>

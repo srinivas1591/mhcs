@@ -1,27 +1,77 @@
-import React from 'react'
+import React , {useEffect , useState} from 'react'
 import {Link} from 'react-router-dom'
+import {  db } from '../firebase'
+
+import { useAuth } from '../authentication/AuthProvider'
 
 const Councellorportal = () => {
+  const [fet,setFet] = useState('')
+  const [quiz,setQuiz] = useState('')
+  const [coun,setCoun] = useState('')
+  useEffect(() => {
+    async function getsuggestions(){
+      const data=await db.collection("suggestfirend").get()
+      setFet(data.docs.map(doc => ({ id: doc.id, data: doc.data() })))
+    }
+    getsuggestions()
+
+    async function getquiz(){
+      const data=await db.collection("quiz").get()
+      setQuiz(data.docs.map(doc => ({ id: doc.id, data: doc.data() })))
+    }
+    getquiz()
+
+    async function getcoun(){
+      const data=await db.collection("councelling").get()
+      setCoun(data.docs.map(doc => ({ id: doc.id, data: doc.data() })))
+    }
+    getcoun()
+  }, [])
+
+  const { logout } = useAuth()
+  function handlelogout()
+  {
+      logout()
+  }
+
     return (
         <div>
+
+<nav className="navbar navbar-expand-sm bg-primary navbar-dark">
+  
+  <div className="navbar-brand mb-0 h1">
+    <Link className="nav-link" to="/councellorportal"><font className="text-white">MHCG</font></Link>
+ </div>
+  <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+    <span className="navbar-toggler-icon"></span>
+  </button>
+  <div className="collapse navbar-collapse justify-content-end" id="collapsibleNavbar">
+  <ul className="navbar-nav">
+    <li className="nav-item active">
+      <Link className="nav-link" to="" onClick={handlelogout}>Logout</Link>
+    </li>
+  </ul>
+  </div>
+</nav>
 
             {/* nav */}
            <div class="container">
                 
                 <br/>
+               
                 
                 <ul class="nav nav-pills nav-justified" role="tablist">
                 <li class="nav-item">
-                    <Link class="nav-link active" data-toggle="pill" to="/chat">Chats</Link>
+                    <a class="nav-link active" data-toggle="pill" href="#chat">Chats</a>
                 </li>
                 <li class="nav-item">
-                    <Link class="nav-link" data-toggle="pill" to="/messages">Messages</Link>
+                    <a class="nav-link" data-toggle="pill" href="#messages">Counselling</a>
                 </li>
                 <li class="nav-item">
-                    <Link class="nav-link" data-toggle="pill" to="/saf">Suggestions</Link>
+                    <a class="nav-link" data-toggle="pill" href="#saf">Suggestions</a>
                 </li>
                 <li class="nav-item">
-                    <Link class="nav-link" data-toggle="pill" to="/quiz">Quiz</Link>
+                    <a class="nav-link" data-toggle="pill" href="#quiz">Quiz</a>
                 </li>
                 </ul>
             
@@ -64,128 +114,74 @@ const Councellorportal = () => {
 
                 {/* Messages Tab*/}
                 <div id="messages" class="container tab-pane fade"><br/>
+                {coun && coun.map(dis => (
                     <div class="container d-flex flex-column ">
                         <div class="card m-2" style={{borderRadius: "10px 10px 10px 10px"}}>
                             <div class="card-body">
                               <h5 class="card-title"><img src="https://www.jing.fm/clipimg/detail/375-3757880_my-account-profile-icon-transparent-white.png" alt="something" class="rounded-circle  m-2" style={{width: "30px", height: "30px"}}/>
-                                Student </h5>
-                              <p class="card-text text-muted">Message display here   text to build on the card title and make up the bulk of the card's content.</p>
-                              <Link to="" class="btn btn-primary float-right ">Chat</Link>
+                                <Link to={`/studentprofile/${dis.data.userId}`}>{dis.data.user}</Link></h5>
+                              <p class="card-text text-muted">{dis.data.problem}</p>
+                              <Link to={`/chat/${dis.data.userId}`} class="btn btn-primary float-right ">Chat</Link>
                             </div>
                         </div>
-
-                        <div class="card m-2" style={{borderRadius: "10px 10px 10px 10px"}}>
-                            <div class="card-body">
-                              <h5 class="card-title"><img src="https://www.jing.fm/clipimg/detail/375-3757880_my-account-profile-icon-transparent-white.png" alt="something" class="rounded-circle  m-2" style={{width: "30px", height: "30px"}}/>
-                                Student </h5>
-                              <p class="card-text text-muted">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                              <Link to="" class="btn btn-primary float-right ">Chat</Link>
-                            </div>
-                        </div>
-
-                    </div>
+                    </div>))}
                 </div>
 
 
 
             {/* Suggestions tab */}
                 <div id="saf" class="container tab-pane fade"><br/>
-                    
-                    <div class="container d-flex flex-column ">
-                        <div class="card m-2" style={{borderRadius: "10px 10px 10px 10px"}}>
-                            <div class="card-body">
-                              <h5 class="card-title"><img src="https://www.jing.fm/clipimg/detail/375-3757880_my-account-profile-icon-transparent-white.png" alt="something" class="rounded-circle  m-2" style={{width: "30px", height: "30px"}}/>
-                                Student </h5>
-                                <div class="row text-center">
-                              <p class="col-sm-4 font-weight-bold">Friend Name</p> <p class="col-sm-4 font-weight-bold">Id Number</p>
-                            </div>
-                                <p class="text-muted">Why are you suggesting him/her?</p>
-                                <p class="">Answer displays here......</p>
-                                <p class="text-muted">Do you observe any behavioural changes?</p>
-                                <p class="">Answer displays here......</p>
-                                <p class="text-muted">Do you observe any behavioural changes?</p>
-                                <p class="">Answer displays here......</p>
-                              <Link to="" class="btn btn-primary float-right ">Chat</Link>
-                            </div>
-                        </div>
-
-                        <div class="card m-2" style={{borderRadius: "10px 10px 10px 10px"}}>
-                            <div class="card-body">
-                              <h5 class="card-title"><img src="https://www.jing.fm/clipimg/detail/375-3757880_my-account-profile-icon-transparent-white.png" alt="something" class="rounded-circle m-2" style={{width: "30px", height: "30px"}}/>
-                                Student </h5>
-                                <div class="row text-center">
-                              <p class="col-sm-4 font-weight-bold">Friend Name</p> <p class="col-sm-4 font-weight-bold">Id Number</p>
-                            </div>
-                                <p class="text-muted">Why are you suggesting him/her?</p>
-                                <p class="">Answer displays here......</p>
-                                <p class="text-muted">Do you observe any behavioural changes?</p>
-                                <p class="">Answer displays here......</p>
-                                <p class="text-muted">Do you observe any behavioural changes?</p>
-                                <p class="">Answer displays here......</p>
-                              <Link to="" class="btn btn-primary float-right ">Chat</Link>
-                            </div>
-                        </div>
-
-                    </div>
-
+                {fet && fet.map(dis => (
+                  <div class="container d-flex flex-column ">
+                  <div class="card m-2" style={{borderRadius: "10px 10px 10px 10px"}}>
+                      <div class="card-body">
+                        <h5 class="card-title"><img src="https://www.jing.fm/clipimg/detail/375-3757880_my-account-profile-icon-transparent-white.png" alt="something" class="rounded-circle  m-2" style={{width: "30px", height: "30px"}}/>
+                          <Link to={`/studentprofile/${dis.data.suggestId}`}>{dis.data.suggestedby}</Link> </h5>
+                          <div class="row text-center">
+                        <p class="col-sm-4 font-weight-bold">Friend Name : {dis.data.name}</p> <p class="col-sm-4 font-weight-bold">{dis.data.id}</p>
+                        
+                      </div>
+                          <p class="text-muted">Why are they suggesting him/her?</p>
+                          <p class="">{dis.data.reason}</p>
+                          <p class="text-muted">Did they share thingd?</p>
+                          <p class="">{dis.data.sharing}</p>
+                        <Link to="" class="btn btn-primary float-right ">Chat</Link>
+                      </div>
+                  </div>
+                  </div>
+                ))}
                 </div>
+
 
 
 
                 {/* Quiz tab */}
                 <div id="quiz" class="container tab-pane fade"><br/>
-                    <h4>Responses as per Rating</h4>
-                    <div class="table-responsive-sm">          
-                        <table class="table table-striped text-center">
-                          <thead>
-                            <tr>
-                              <th>5</th>
-                              <th>4</th>
-                              <th>3</th>
-                              <th>2</th>
-                              <th>1</th>
-                              </tr>
-                          </thead>
-                          <tbody>
-                            <tr>
-                              <td><Link to="" class="link">Name</Link></td>
-                              <td><Link to="" class="link">Name</Link></td>
-                              <td><Link to="" class="link">Name</Link></td>
-                              <td><Link to="" class="link">Name</Link></td>
-                              <td><Link to="" class="link">Name</Link></td>
-                            </tr>
-                            <tr>
-                                <td><Link to="" class="link">Name</Link></td>
-                                <td><Link to="" class="link">Name</Link></td>
-                                <td><Link to="" class="link">Name</Link></td>
-                                <td><Link to="" class="link">Name</Link></td>
-                                <td><Link to="" class="link">Name</Link></td>
-                              </tr>
-                              <tr>
-                                <td><Link to="" class="link">Name</Link></td>
-                                <td><Link to="" class="link">Name</Link></td>
-                                <td><Link to="" class="link">Name</Link></td>
-                                <td><Link to="" class="link">Name</Link></td>
-                                <td><Link to="" class="link text-danger">Name</Link></td>
-                              </tr>
-
-                              <tr>
-                                <td><Link to="" class="link">Name</Link></td>
-                                <td><Link to="" class="link">Name</Link></td>
-                                <td><Link to="" class="link">Name</Link></td>
-                                <td><Link to="" class="link">Name</Link></td>
-                                <td><Link to="" class="link text-danger">Name</Link></td>
-                              </tr>
-                          </tbody>
-                        </table>
-                        </div>
+                {quiz && quiz.map(dis => (
+                  <div class="container d-flex flex-column ">
+                  <div class="card m-2" style={{borderRadius: "10px 10px 10px 10px"}}>
+                      <div class="card-body">
+                        <h5 class="card-title"><img src="https://www.jing.fm/clipimg/detail/375-3757880_my-account-profile-icon-transparent-white.png" alt="something" class="rounded-circle  m-2" style={{width: "30px", height: "30px"}}/>
+                          <Link to={`/studentprofile/${dis.data.user}`}>{dis.data.userId}</Link> </h5>
+                          <div class="row text-center">
+                        
                       </div>
-                      
+                          <p class="text-muted">Rating of his/her week? {dis.data.rating}</p>
+                          <p class="text-muted">Have all things went according to how you planned?</p>
+                          <p class="">{dis.data.things}</p>
+                          <p class="text-muted">All ok with family and friends?</p>
+                          <p class="">{dis.data.fam}</p>
+                          <p class="text-muted">How well were you motivated? {dis.data.motivate}</p>
+                          <p class="text-muted">Are you feeling low?? {dis.data.feeling}</p>
+                          
+                      </div>
+                  </div>
+                  </div>
+                ))}
+                        
                 </div>
-                </div>
-            </div>
            
-
+</div></div></div>
 
         
     )

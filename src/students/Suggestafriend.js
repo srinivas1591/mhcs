@@ -19,10 +19,13 @@ const Suggestafriend = () => {
     }
     else{
       const authId=auth.X
-      await db.collection("suggestfirend").doc().set({'suggestedby' : authId , 'name' : nameRef.current.value , 'id': idRef.current.value , 'reason' : suggestionRef.current.value , 'behaviour changes' : changes , 'sharing' : share})
+      const useru = await db.collection('users').doc(authId).get()
+      const usernames = useru.data().username
+      await db.collection("suggestfirend").doc().set({'suggestedby' : usernames ,'suggestId':authId, 'name' : nameRef.current.value , 'id': idRef.current.value , 'reason' : suggestionRef.current.value , 'behaviour changes' : changes , 'sharing' : share})
       .then(auth =>{
         setSuccess("successfully submitted!!!!!")
         setError('')
+        document.getElementById('form').reset()
       }).catch(e=>{
         setError("Something went wrong , try please try again!!!")
       })
@@ -50,7 +53,7 @@ const Suggestafriend = () => {
                 <div class="card-deck bg-light">
                   <div class="card-body">
                     <h2 class="card-title text-center">Suggest a Friend</h2>
-                    <form name="f">
+                    <form name="f" id="form">
                         <div class="row">
                         <div class="col-sm-5 form-group">
                             <label for="usr">Name:</label>

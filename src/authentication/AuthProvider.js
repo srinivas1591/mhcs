@@ -26,13 +26,13 @@ const AuthProvider = ({children}) => {
     
       
 
-    async function signup(username,password,clgid ,classroom){
+    async function signup(username,password,clgid ,classroom,name){
         try{
             auth.createUserWithEmailAndPassword(username,password).then(auth => {
               if(auth.user)
               {
                 setCurrentUserID(auth.user.id) 
-                db.collection('users').doc(auth.user.uid).set({'email':username , 'collegeid' : clgid , 'class' : classroom})
+                db.collection('users').doc(auth.user.uid).set({'email':username ,'username':name, 'collegeid' : clgid , 'class' : classroom})
                  history.push('/')
             }
             }).catch(e => {
@@ -49,9 +49,15 @@ const AuthProvider = ({children}) => {
            
             try{
                 await  auth.signInWithEmailAndPassword(username,password)
+
                 if(auth){
-                   // setCurrentUserID(auth.user.uid)
+                    if(auth.X === 'IzdgmuwWcmcMwPZ891jRq3BZKwL2')
+                    {
+                        history.push('/councellorportal')
+                    }
+                   else{
                     history.push('/')
+                   }
                 }
             }
             catch(e){

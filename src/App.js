@@ -13,7 +13,8 @@ import Councelling from './students/Councelling'
 import Careerguidance from './students/Careerguidance'
 import Chats from './students/Chats'
 import Councellorportal from "./students/Councellorportal";
-
+import Stuprof from "./students/Stuprof";
+import CounselChat from './students/CounselChat'
 
 function App() {
   return (
@@ -28,8 +29,10 @@ function App() {
             <PrivateRoute path='/careerguidance' component={Careerguidance}/>
             <PrivateRoute path='/councelling' component={Councelling}/>
             <PrivateRoute path='/suggestfriend' component={Suggestafriend}/>
-            <PrivateRoute path='/councellorportal' component={Councellorportal}/>
-            <PrivateRoute path='/chat' component={Chats}/>
+            <Route path='/councellorportal' component={Councellorportal}/>
+            <Route path='/chat/:userId'  render={(props) => (<Chats {...props.match.params} />)}/>
+            <Route path='/studentprofile/:userId'  render={(props) => (<Stuprof {...props.match.params} />)}/>
+            <PrivateRoute path='/counselchat' component={CounselChat} />
             <Route path="/signin" component={ Signin } />
             <Route path="/signup" component={ Signup } />
             <Route path="/forgot" component={ Forgot } />

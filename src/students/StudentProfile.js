@@ -11,11 +11,18 @@ import { Link } from 'react-router-dom'
 const StudentProfile = () => {
     const { logout } = useAuth()
     const [details , setDetails] = useState('')
+    const [counsellor,setCounsellor] = useState('')
+    
     useEffect(() => {
        async function geuser(){
             const dat = await db.collection('users').doc(auth.X).get()
             setDetails(dat.data())
             console.log(dat.data())
+            if(auth.X === 'IzdgmuwWcmcMwPZ891jRq3BZKwL2')
+    {
+        setCounsellor(true)
+        console.log(auth.X)
+    }
        }
        geuser()
     }, [])
@@ -25,7 +32,7 @@ const StudentProfile = () => {
     return (
         <div>
             <Navbarex />
-            <Link to='/councellorportal'>portal</Link>
+           {counsellor && <Link to='/councellorportal'>portal</Link>}
             <center>
             <Card className="xyz" style={{ width: '18rem' }}>
             <Card.Img variant="top" src={ proicon } />
