@@ -56,8 +56,10 @@ const AuthProvider = ({children}) => {
                         history.push('/councellorportal')
                     }
                    else{
+                       console.log(auth)
                     history.push('/')
                    }
+                    console.log(auth.X)
                 }
             }
             catch(e){

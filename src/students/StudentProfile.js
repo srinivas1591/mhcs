@@ -37,7 +37,7 @@ const StudentProfile = () => {
             <Card className="xyz" style={{ width: '18rem' }}>
             <Card.Img variant="top" src={ proicon } />
             <Card.Body>
-            <Card.Title>{ details.email }</Card.Title>
+            <Card.Title>{ details.username }</Card.Title>
             <Card.Text>
                 Student
             </Card.Text>

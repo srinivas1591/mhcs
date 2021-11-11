@@ -8,6 +8,7 @@ const Councellorportal = () => {
   const [fet,setFet] = useState('')
   const [quiz,setQuiz] = useState('')
   const [coun,setCoun] = useState('')
+  const [feed,setFeed] = useState('')
   useEffect(() => {
     async function getsuggestions(){
       const data=await db.collection("suggestfirend").get()
@@ -26,6 +27,12 @@ const Councellorportal = () => {
       setCoun(data.docs.map(doc => ({ id: doc.id, data: doc.data() })))
     }
     getcoun()
+
+    async function getFeedback(){
+      const data=await db.collection("feedback").get()
+      setFeed(data.docs.map(doc => ({ id: doc.id, data: doc.data() })))
+    }
+    getFeedback()
   }, [])
 
   const { logout } = useAuth()
@@ -62,7 +69,7 @@ const Councellorportal = () => {
                 
                 <ul class="nav nav-pills nav-justified" role="tablist">
                 <li class="nav-item">
-                    <a class="nav-link active" data-toggle="pill" href="#chat">Chats</a>
+                    <a class="nav-link active" data-toggle="pill" href="#chat">Feedback</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" data-toggle="pill" href="#messages">Counselling</a>
@@ -78,37 +85,23 @@ const Councellorportal = () => {
                     {/* Chats Tab */}  
                 <div class="tab-content bg-light">
                 <div id="chat" class="container tab-pane active"><br/>
-                    <div class="text-center">
-                        <div>
-                        <Link to=""  class="btn btn-primary text-dark shadow-sm col-sm-4 p-3 m-1" style={{border: "none", backgroundColor: "white", textAlign: "left"}}>
-                            <img src="https://www.jing.fm/clipimg/detail/375-3757880_my-account-profile-icon-transparent-white.png" alt="something" class="rounded-circle" style={{width: "30px", height: "30px"}}/>
-                            Student 
-                          <span class="badge badge-info float-right p-2">4</span>
-                        </Link>
+                        
+                    {feed && feed.map(dis => (
+                    <div class="container d-flex flex-column ">
+                        <div class="card m-2" style={{borderRadius: "10px 10px 10px 10px"}}>
+                            <div class="card-body">
+                              <h5 class="card-title"><img src="https://www.jing.fm/clipimg/detail/375-3757880_my-account-profile-icon-transparent-white.png" alt="something" class="rounded-circle  m-2" style={{width: "30px", height: "30px"}}/>
+                                <Link to={`/studentprofile/${dis.data.userId}`}>{dis.data.user}</Link></h5>
+                                <p className="text-muted">What help have you got?</p>
+                                <p className="">{dis.data.service}</p>
+                                <p className="text-muted">How much do you rate for the service?</p>
+                                <p className="">{dis.data.rating}</p>
+                                <p className="text-muted">Say something how it helped you?</p>
+                                <p className="">{dis.data.suggestion}</p>
+                              <Link to={`/chat/${dis.data.userId}`} class="btn btn-primary float-right ">Chat</Link>
+                            </div>
                         </div>
-                        <div>
-                            <Link to="" class="btn btn-primary text-dark shadow-sm col-sm-4 p-3 m-1" style={{border: "none", backgroundColor: "white", textAlign: "left"}}>
-                                <img src="https://www.jing.fm/clipimg/detail/375-3757880_my-account-profile-icon-transparent-white.png" alt="something" class="rounded-circle" style={{width: "30px", height: "30px"}}/>
-                                Student 
-                              <span class="badge badge-info float-right p-2">2</span>
-                            </Link>
-                        </div>
-                        <div>
-                            <Link to="" class="btn btn-primary text-dark shadow-sm col-sm-4 p-3 m-1" style={{border: "none", backgroundColor: "white", textAlign: "left"}}>
-                                <img src="https://www.jing.fm/clipimg/detail/375-3757880_my-account-profile-icon-transparent-white.png" alt="something"  class="rounded-circle" style={{width: "30px", height: "30px"}}/>
-                                Student 
-                              <span class="badge badge-info float-right p-2">1</span>
-                            </Link>
-                        </div>
-                        <div>
-                            <Link to="" class="btn btn-primary text-dark shadow-sm col-sm-4 p-3 m-1" style={{border:"none", backgroundColor: "white", textAlign: "left"}}>
-                                <img src="https://www.jing.fm/clipimg/detail/375-3757880_my-account-profile-icon-transparent-white.png" alt="something" class="rounded-circle" style={{width: "30px", height: "30px"}}/>
-                                Student 
-                              <span class="badge badge-info float-right p-2"></span>
-                            </Link>
-                        </div>
-                       
-                      </div>                      
+                    </div>))}                  
                 </div>
 
 
@@ -120,7 +113,7 @@ const Councellorportal = () => {
                             <div class="card-body">
                               <h5 class="card-title"><img src="https://www.jing.fm/clipimg/detail/375-3757880_my-account-profile-icon-transparent-white.png" alt="something" class="rounded-circle  m-2" style={{width: "30px", height: "30px"}}/>
                                 <Link to={`/studentprofile/${dis.data.userId}`}>{dis.data.user}</Link></h5>
-                              <p class="card-text text-muted">{dis.data.problem}</p>
+                              <p class="card-text  ml-5">{dis.data.problem}</p>
                               <Link to={`/chat/${dis.data.userId}`} class="btn btn-primary float-right ">Chat</Link>
                             </div>
                         </div>

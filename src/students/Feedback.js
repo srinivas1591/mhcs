@@ -5,7 +5,6 @@ import { Alert } from 'react-bootstrap'
 import Navbarex from './Navbarex'
 import { auth ,db } from '../firebase'
 const Feedback = () => {
-   const authId= auth.X
    const sayRef=useRef()
    const [error , setError] = useState('')
    const [success , setSuccess] = useState('')
@@ -18,7 +17,10 @@ const Feedback = () => {
          setError("please fill all fields")
       }
       else{
-         db.collection('feedback').doc(authId).set({'service' : service , 'suggestion' :  sayRef.current.value , 'rating' : rate})
+         const getuse = await db.collection('users').doc(auth.X).get()
+         const username = getuse.data().username
+         console.log(username)
+         await db.collection('feedback').doc().set({'user': username,'userId':auth.X,'service' : service , 'suggestion' :  sayRef.current.value , 'rating' : rate})
          .then(auth =>{
             setSuccess("Hurray")
             document.getElementById('form').reset()
