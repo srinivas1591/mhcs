@@ -1,9 +1,20 @@
-import React  from 'react'
+import React , {useEffect , useState}  from 'react'
 import career from '../assets/a.jpg'
 import Navbarex from './Navbarex'
+import {  db } from '../firebase'
 
 const Careerguidance = () => {
-
+  const [faculty , setFaculty] = useState('')
+  useEffect(() => {
+    async function fetfaculty(){
+      await db.collection("faculty").onSnapshot((snapshot) =>{
+        setFaculty(snapshot.docs.map(doc => ({ id: doc.id, data: doc.data() })))
+      })
+      
+    }
+    console.log(faculty)
+    fetfaculty()
+  }, [])
     return (
         <div>
           <Navbarex />
@@ -27,6 +38,7 @@ const Careerguidance = () => {
             
                 <table class="table table-borderless text-center">
                     <thead>
+                      
                       <tr>
                         <th>Name</th>
                         <th>Branch</th>
@@ -34,31 +46,14 @@ const Careerguidance = () => {
                       </tr>
                     </thead>
                     <tbody>
-                      <tr>
-                        <td>John</td>
-                        <td>CSE</td>
-                        <td><button class="btn btn-primary"  >9999999999 </button></td>
+                      {faculty && faculty.map(fac=>(
+                        <tr>
+                        <td>{fac.data.username}</td>
+                        <td>{fac.data.branch}</td>
+                        <td><button class="btn btn-primary"  >{fac.data.mobile}</button></td>
                       </tr>
-                      <tr>
-                        <td>Mary</td>
-                        <td>ECE</td>
-                        <td><button class="btn btn-primary"  >9999999999 </button></td>
-                      </tr>
-                      <tr>
-                        <td>July</td>
-                        <td>MECH</td>
-                        <td><button class="btn btn-primary"  >9999999999 </button></td>
-                      </tr>
-                      <tr>
-                        <td>Stan</td>
-                        <td>CIVIL</td>
-                        <td><button class="btn btn-primary"  >9999999999 </button></td>
-                      </tr>
-                      <tr>
-                        <td>Stephen</td>
-                        <td>CHEM</td>
-                        <td><button class="btn btn-primary"  >9999999999 </button></td>
-                      </tr>
+                      ))}
+                      
                     </tbody>
                   </table>
     

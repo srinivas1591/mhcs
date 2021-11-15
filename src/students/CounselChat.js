@@ -69,7 +69,7 @@ const CounselChat = () => {
                 <Link to='/'><img src= {back} alt="it helps" style={{width:25}}/></Link>
 
                     <div id="mydiv" class="b-0 overflow-auto" style={{height: "33em"}}>
-                        {messages && messages.map(msg => <ChatMessage sender={msg.data.sender} getmn={auth.X} message={msg.data.message} />)}
+                        {messages && messages.map(msg => <ChatMessage sender={msg.data.sender}  getmn={auth.X} message={msg.data.message} />)}
                     </div>
                
 
