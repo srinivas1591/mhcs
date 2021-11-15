@@ -44,18 +44,23 @@ const Chats = ({userId}) => {
         }
         else{
             const authId=auth.X
+            const sendit = messageRef.current.value
+            document.getElementById('inp').value=''
             await db.collection(userId).doc().set({  'sender' : authId ,
             'createdAt' : firebase.firestore.FieldValue.serverTimestamp(),
-            'message' : messageRef.current.value }).then(auth =>{
+            'message' : sendit }).then(auth =>{
                 console.log('sent successfully')
-                document.getElementById('inp').value=''
             }).catch(e =>{
                 setError(e)
             })
         }
     }
 
-  
+    const handleKeypress = e => {   
+        if (e.code === "Enter" || e.code === "NumpadEnter") {     
+             handlemessage();    
+         }
+     };
     return (
         <div>
             <center>
@@ -76,9 +81,9 @@ const Chats = ({userId}) => {
                
 
                     <div class=" container input-group sticky-bottom w-auto" >
-                        <input type="text" class="form-control p-4" ref={messageRef} placeholder="Search" id="inp" />
+                        <input type="text" class="form-control p-4" onKeyPress={handleKeypress} ref={messageRef} placeholder="Search" id="inp" />
                         <div class="input-group-append">
-                          <button class="btn btn-primary " type="submit" onClick={handlemessage}>
+                          <button class="btn btn-primary " style={{ width:"55px" }} type="submit" onClick={handlemessage}>
                               <img src="https://cdn.pixabay.com/photo/2015/12/07/22/53/paper-planes-1081560_1280.png" alt="something" width="30px" height="30px"/>
                           </button>  
                          </div>
