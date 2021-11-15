@@ -1,13 +1,16 @@
-import React , {useRef , useState} from 'react'
+import React , {useRef , useState ,useEffect } from 'react'
 import counselling from '../assets/counsellingpage.jpg'
 import Navbarex from './Navbarex'
 import {auth,db} from '../firebase'
 import { Alert } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
+import '../css/auth.css'
 
 const Councelling = () => {
   const [error,setError] = useState('')
   const [success,setSuccess] = useState('')
+  
+  const [link,setLink] = useState('')
   const problemRef = useRef()
   async function handlesubmit(){
     if((problemRef.current.value).length===0){
@@ -27,6 +30,14 @@ const Councelling = () => {
       })
     }
   }
+
+useEffect(() => {
+  async function getMeetLink(){
+    const meetlink = await db.collection('meetlink').doc('meetlink').get()
+    setLink(meetlink.data().link)
+  }
+  getMeetLink()
+}, [])
 
     return (
         <div>
@@ -62,7 +73,7 @@ const Councelling = () => {
       
     </form>
     OR
-    <div><button type="button"  class="btn btn-primary"><Link to='/counselchat' style={{ color:"white" }}>Chat</Link></button></div>
+    <div><button type="button"  class="btn btn-primary"><Link to='/counselchat' style={{ color:"white" }}>Chat</Link></button> <button type="button"  class="btn btn-primary"><Link to={{ pathname: `${link}` }} target="_blank" style={{ color:"white" }}>Meet Now</Link></button></div>
     </div>
 </div>
   </div>

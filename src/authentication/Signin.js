@@ -44,7 +44,7 @@ const Signin = () => {
                 <div className="sub2">
                         <center>  
                                 <Form autoComplete="off">
-                                    <font className="alink">Student Login   |   Counsellor Login</font><br/>
+                                    <font className="alink">Student Login</font><br/>
                                     <input type="email"  ref= { userRef } className="form-control" placeholder="email" />
                                     <input type="password" ref= { passRef } className="form-control" placeholder="password"/>
                                     <Link to="/forgot" className="alink">Forgot Password?</Link><br/>

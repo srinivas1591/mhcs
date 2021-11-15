@@ -83,17 +83,11 @@ const Chats = ({userId}) => {
                           </button>  
                          </div>
                       </div>
-
-
             </div>
             </div>
-        
-        
-            
         </div>
     )
 }
-
 
 function ChatMessage(props) {
     const text = props.message

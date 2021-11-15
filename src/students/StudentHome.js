@@ -13,6 +13,8 @@ const StudentHome = () => {
     return (
         <div>
             <Navbarex />
+            
+<center><h3>Mental Health Care System</h3>&<br/><h3>Career Guidance</h3></center>
 
 <div className="container bg-blue">
 

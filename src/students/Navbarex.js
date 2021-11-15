@@ -16,7 +16,7 @@ const Navbar = () => {
              <nav className="navbar navbar-expand-sm bg-primary navbar-dark">
   
   <div className="navbar-brand mb-0 h1">
-    <Link className="nav-link" to="/"><font className="text-white">MHCG</font></Link>
+    <Link className="nav-link" to="/"><font className="text-white">MHCS & CG</font></Link>
  </div>
   <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
     <span className="navbar-toggler-icon"></span>
