@@ -2,6 +2,7 @@ import React , {useEffect , useState}  from 'react'
 import career from '../assets/a.jpg'
 import Navbarex from './Navbarex'
 import {  db } from '../firebase'
+import { Link } from 'react-router-dom'
 
 const Careerguidance = () => {
   const [faculty , setFaculty] = useState('')
@@ -12,7 +13,6 @@ const Careerguidance = () => {
       })
       
     }
-    console.log(faculty)
     fetfaculty()
   }, [])
     return (
@@ -42,7 +42,8 @@ const Careerguidance = () => {
                       <tr>
                         <th>Name</th>
                         <th>Branch</th>
-                       
+                        <th>Mobile</th>
+                        <th>Meet</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -51,6 +52,7 @@ const Careerguidance = () => {
                         <td>{fac.data.username}</td>
                         <td>{fac.data.branch}</td>
                         <td><button class="btn btn-primary"  >{fac.data.mobile}</button></td>
+                        <td><Link to={{ pathname:`${fac.data.meet}` }} target="_blank">meet</Link></td>
                       </tr>
                       ))}
                       

@@ -17,6 +17,7 @@ import Stuprof from "./students/Stuprof";
 import CounselChat from './students/CounselChat'
 import FacultySignUp from './faculty/FacultySignUp'
 import FacultySignIn from "./faculty/FacultySignIn";
+import CouncellorLogin from "./faculty/CouncellorLogin";
 
 function App() {
   return (
@@ -40,6 +41,7 @@ function App() {
             <Route path="/forgot" component={ Forgot } />
             <Route path="/abcd" component={ FacultySignUp } />
             <Route path="/efgh" component={ FacultySignIn } />
+            <Route path="/councellorlogin" component={CouncellorLogin}  />
           </AuthContext>
         </Switch>
       </Router>
