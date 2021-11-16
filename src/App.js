@@ -24,7 +24,7 @@ function App() {
     <div className="App">
       <Router>
         <Switch>
-          <AuthContext>
+          <AuthContext> 
             <PrivateRoute exact path="/" component={ StudentHome } />
             <PrivateRoute  path="/profile" component={ StudentProfile } />
             <PrivateRoute path='/quiz' component={Quiz} />
